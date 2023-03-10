@@ -19,7 +19,7 @@ def generate_output():
             subprocess.run(['echo', 'hello'])
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             output, erro = process.communicate()
-            yield str.endcode( f'{erro}')
+            yield str.encode( f'{erro}')
             yield str.encode('--Connection Established--\n')
             while True:
                 line = process.stdout.readline()
