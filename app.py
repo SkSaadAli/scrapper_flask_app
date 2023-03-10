@@ -12,7 +12,7 @@ dic={1:False,2:False,3:False}
 max_retries=3
 max_sites=40
 def generate_output():
-    cmd = ["python","-u", "scrapper_flask_app/final_test.py", str(dic), str(max_retries),str(max_sites),filename]
+    cmd = ["python","-u", "/final_test.py", str(dic), str(max_retries),str(max_sites),filename]
     yield str.encode('--Connection Established--\n')
     if dic[1] or dic[2] or dic[3]:
         process = subprocess.Popen(
