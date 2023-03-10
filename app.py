@@ -3,6 +3,8 @@ import time
 from flask import Flask, Response, render_template_string,render_template,request,redirect,send_file,after_this_request
 import os
 import uuid
+from waitress import serve
+
 app = Flask(__name__)
 
 
@@ -12,7 +14,7 @@ max_retries=3
 max_sites=40
 def generate_output():
     cmd = ["python","-u", "final_test.py", str(dic), str(max_retries),str(max_sites),filename]
-    yield str.encode('--Connection Established--\n')
+    yield '--Connection Established--\n'
     if dic[1] or dic[2] or dic[3]:
         try:
             # subprocess.run(['echo', 'hello'])
@@ -27,7 +29,7 @@ def generate_output():
                 yield line + b'\n'
                 time.sleep(0.08)
         except Exception as error:
-            yield str.encode(f'{error}')
+            yield str.decode(f'{error}')
     else:
         yield 'No Site Selected You Shouldn\'t be here\n'
     
@@ -84,4 +86,4 @@ def output():
     return Response(generate_output(), mimetype='text/html')
 
 if __name__ == '__main__':
-    app.run()
+    serve(app, host='0.0.0.0', port=5000)
