@@ -12,17 +12,19 @@ dic={1:False,2:False,3:False}
 max_retries=3
 max_sites=40
 def generate_output():
-    cmd = ["python","-u", "/final_test.py", str(dic), str(max_retries),str(max_sites),filename]
+    cmd = ["python","-u", "final_test.py", str(dic), str(max_retries),str(max_sites),filename]
     yield str.encode('--Connection Established--\n')
     if dic[1] or dic[2] or dic[3]:
-        yield str.encode('--Connection Established--\n')
         try:
             process = subprocess.Popen(
             
                 cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            yield str.encode('--Connection Established--\n')
             while True:
                 line = process.stdout.readline()
+                yield str.encode('--Connection Established--\n')
                 if not line:
+                    yield str.encode('--Connection Establishedfinal break--\n')
                     break
                 yield line + b'\n'
                 time.sleep(0.08)
