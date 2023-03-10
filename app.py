@@ -15,6 +15,7 @@ def generate_output():
     cmd = ["python","-u", "/final_test.py", str(dic), str(max_retries),str(max_sites),filename]
     yield str.encode('--Connection Established--\n')
     if dic[1] or dic[2] or dic[3]:
+        yield str.encode('--Connection Established--\n')
         try:
             process = subprocess.Popen(
             
@@ -26,7 +27,7 @@ def generate_output():
                 yield line + b'\n'
                 time.sleep(0.08)
         except Exception as error:
-            yield str(error)
+            yield str.encode(f'{error}')
     else:
         yield 'No Site Selected You Shouldn\'t be here\n'
     
