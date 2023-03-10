@@ -1,0 +1,146 @@
+<html>
+  <head>
+
+    <title>Scrapping Logs</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    
+    
+    <style>
+    .download-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.download-section img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.download-section .download-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.download-section .download-button.hidden {
+  display: none;
+}
+.download-section.hidden {
+  display: none;
+}
+
+.download-section .download-button:hover {
+  background-color: #0062cc;
+}
+
+    .logging_window{
+      display: block;
+      padding: 9.5px;
+      font-size: 13px;
+      line-height: 1.42857143;
+      color: #333;
+      word-break: break-all;
+      word-wrap: break-word;
+      background-color: #000000;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      width: 60%;
+      margin: auto;
+
+      
+  }
+  pre{
+    color: rgb(161, 10, 255);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+  }
+  ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000000; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
+  border-radius: 10px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+::-webkit-scrollbar-corner {
+  background-color: #000000; /* color of the scrollbar corner */
+}
+
+  </style>
+  
+  </head>
+  <body id="main">
+    <div class="row">
+      <div style="height: 3px;"></div>
+      <h2 align="center">Logging will appear here Have Paitience While We Scrape Websites:</h2>
+      <!-- <div id="output" > -->
+      <div class="logging_window">
+        <pre style="
+          max-height: 72vh;
+          height: auto;
+          width: auto;
+         overflow: scroll;
+         padding-left: 15px;
+         padding-right: 15px;" id="output"></pre>
+      </div>
+      
+      <!-- </div> -->
+    </div>
+    <div class="download-section">
+
+      <a href="#" class="download-button hidden">Download CSV file</a>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function(){
+      var output = document.getElementById('output');
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', "{{ url_for('output') }}", true);
+      xhr.send();
+      var lastResponse = '';
+      var updating = false;
+      function updateOutput() {
+        if (!updating && xhr.responseText !== lastResponse) {
+          updating = true;
+          output.textContent = xhr.responseText;
+          output.scrollTop = output.scrollHeight;
+          lastResponse = xhr.responseText;
+          updating = false;
+        }
+      }
+      setInterval(updateOutput, 500);
+
+      xhr.onload = function() {
+    if (xhr.status === 200) {
+      var filename = xhr.responseText;
+      if (filename!='--Connection Established--\nNo Site Selected You Shouldn\'t be here\n'){
+        var downloadButton = document.createElement('a');
+      downloadButton.textContent = 'Download CSV file';
+      downloadButton.href = '/download_output/' + "{{filename}}";
+      downloadButton.download = 'output.csv';
+      downloadButton.classList.add('download-button');
+      downloadButton.classList.remove('hidden');
+      document.querySelector('.download-section').appendChild(downloadButton);
+      }
+      
+    }};
+    });
+  </script>
+  
+</html>

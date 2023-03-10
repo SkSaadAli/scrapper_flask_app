@@ -1,0 +1,151 @@
+<!-- multistep form -->
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Ultimate Web SCRAPPER</title>
+        <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/index.css')}}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- multistep form -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>ul.ks-cboxtags {
+  list-style: none;
+  padding: 20px; }
+  ul.ks-cboxtags li {
+    display: inline; }
+    ul.ks-cboxtags li label {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(139, 139, 139, 0.3);
+      color: #adadad;
+      border-radius: 25px;
+      white-space: nowrap;
+      margin: 3px 0px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-transition: all .2s;
+      -o-transition: all .2s;
+      transition: all .2s;
+      font-weight: 400; }
+
+ul.ks-cboxtags li label {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 6px solid rgba(139, 139, 139, 0.3);
+  width: 143px; }
+  ul.ks-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "FontAwesome";
+    font-weight: 400;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+    content: "\f067";
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    transition: -webkit-transform .3s ease-in-out;
+    -o-transition: transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
+    transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out; }
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+  content: "\f00c";
+  -webkit-transform: rotate(-360deg);
+  -ms-transform: rotate(-360deg);
+  transform: rotate(-360deg);
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+  transition: -webkit-transform .3s ease-in-out;
+  -o-transition: transform .3s ease-in-out;
+  transition: transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out; }
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+  border: 5px solid #fec771;
+  background-color: #fec771;
+  color: #fff;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s; }
+
+ul.ks-cboxtags li input[type="checkbox"] {
+  display: absolute; }
+
+ul.ks-cboxtags li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0; }
+
+</style>
+
+<form method="POST" id="multistepsform">
+    <!-- progressbar -->
+    <div class="center">
+          <center>
+        <h1 style="padding-bottom: 29px;">ULTIMATE WEB SCRAPPER FOR UDEMY COURSES</h1></center>
+        <div >
+  <ul id="progressbar">
+    <center style="
+    margin-left: 99px;
+">
+    <li class="active" 
+>Choose Website</li>
+    <li>Additional Details</li>
+      </center>
+
+  </ul>
+    
+  </div>
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">Choose Website Of Your Choice</h2>
+    <center>
+<ul class="ks-cboxtags" >
+<center>
+<li>
+<input type="checkbox" id="checkboxOne" value="True" name="checkboxOne">
+<label for="checkboxOne">Real Discount</label>
+</li><br>
+<li>
+<input type="checkbox" id="checkboxTwo" value="True"name="checkboxTwo">
+<label for="checkboxTwo">Tutorial Bar</label>
+</li>
+<li><br>
+<input type="checkbox" id="checkboxThree" value="True" name="checkboxThree">
+<label for="checkboxThree">Jobs.e-Next</label>
+</li>
+</center>
+</ul>
+</center>
+    <input disabled id="next1" type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+
+  <fieldset>
+    <h2 class="fs-title">Give Additional Details</h2><br><br>
+<label for="retry">Max No. Of Retries:</label>
+    <input id="retry" type="number"   value="3" name="retry"/>
+    <label for="max_site">Max No. Of Courses Scrapped/ WebSite Chosen:</label>
+    <input id="max_site" type="number"  value="40" name="max_site" />
+    <label for="max_age">Max Age In Days Of Course Is Collected:</label>
+    <input name="max_age" type="number"  value="20"  />
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+
+    <input id="submit" type="submit" name="submit" class="next action-button"value="Submit" >
+  </fieldset>
+  
+</form>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js')}}"></script>
+</body>
+</html>
