@@ -3,7 +3,6 @@ import time
 from flask import Flask, Response, render_template_string,render_template,request,redirect,send_file,after_this_request
 import os
 import uuid
-
 app = Flask(__name__)
 
 
@@ -16,16 +15,14 @@ def generate_output():
     yield str.encode('--Connection Established--\n')
     if dic[1] or dic[2] or dic[3]:
         try:
-            subprocess.run(['echo', 'hello'])
+            # subprocess.run(['echo', 'hello'])
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-            output, erro = process.communicate()
-            yield str.encode( f'{erro}')
-            yield str.encode('--Connection Established--\n')
+
             while True:
                 line = process.stdout.readline()
-                yield str.encode('--Connection Established--\n')
+   
                 if not line:
-                    yield str.encode('--Connection Establishedfinal break--\n')
+   
                     break
                 yield line + b'\n'
                 time.sleep(0.08)
