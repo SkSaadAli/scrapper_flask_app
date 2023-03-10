@@ -15,15 +15,18 @@ def generate_output():
     cmd = ["python","-u", "/final_test.py", str(dic), str(max_retries),str(max_sites),filename]
     yield str.encode('--Connection Established--\n')
     if dic[1] or dic[2] or dic[3]:
-        process = subprocess.Popen(
-        
-            cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-        while True:
-            line = process.stdout.readline()
-            if not line:
-                break
-            yield line + b'\n'
-            time.sleep(0.08)
+        try:
+            process = subprocess.Popen(
+            
+                cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            while True:
+                line = process.stdout.readline()
+                if not line:
+                    break
+                yield line + b'\n'
+                time.sleep(0.08)
+        except Exception as error:
+            yield str(error)
     else:
         yield 'No Site Selected You Shouldn\'t be here\n'
     
