@@ -16,10 +16,10 @@ def generate_output():
     yield str.encode('--Connection Established--\n')
     if dic[1] or dic[2] or dic[3]:
         try:
-            output, erro = process.communicate()
             subprocess.run(['echo', 'hello'])
-            yield str.endcode( f'{erro}')
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            output, erro = process.communicate()
+            yield str.endcode( f'{erro}')
             yield str.encode('--Connection Established--\n')
             while True:
                 line = process.stdout.readline()
